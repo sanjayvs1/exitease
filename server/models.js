@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 // Resignation model
 const resignationSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   name: {
     type: String,
     required: true,
@@ -27,12 +32,47 @@ const resignationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    enum: ["pending", "approved", "withdrawn"],
+    default: "pending",
+  },
+  submittedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Withdrawal model
+const withdrawalSchema = new mongoose.Schema({
+  resignationId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Resignation',
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  reason: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  status: {
+    type: String,
     enum: ["pending", "approved", "rejected"],
     default: "pending",
   },
   submittedAt: {
     type: Date,
     default: Date.now,
+  },
+  reviewedAt: {
+    type: Date,
+  },
+  reviewedBy: {
+    type: String,
+    trim: true,
   },
 });
 
@@ -57,5 +97,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 const Resignation = mongoose.model("Resignation", resignationSchema);
+const Withdrawal = mongoose.model("Withdrawal", withdrawalSchema);
 
-module.exports = { User, Resignation };
+module.exports = { User, Resignation, Withdrawal };

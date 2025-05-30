@@ -27,7 +27,7 @@ export default function Header() {
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Title */}
+      
           <div className="flex items-center">
             <h1 className="text-lg sm:text-xl font-semibold text-gray-900 truncate">
               <span className="hidden sm:inline">ExitEase</span>
@@ -35,7 +35,6 @@ export default function Header() {
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">
             {user.role === 'HR' && (
               <Button
@@ -63,7 +62,6 @@ export default function Header() {
             </Button>
           </div>
           
-          {/* Desktop User Info & Logout */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <User className="h-4 w-4 text-gray-600" />
